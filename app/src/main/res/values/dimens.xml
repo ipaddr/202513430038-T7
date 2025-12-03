@@ -25,6 +25,7 @@
     <!-- Text sizes -->
     <dimen name="text_size_h1">24sp</dimen>
     <dimen name="text_size_h2">20sp</dimen>
+    <dimen name="text_size_h3">18sp</dimen>
     <dimen name="text_size_normal">16sp</dimen>
     <dimen name="text_size_button">14sp</dimen>
     <dimen name="text_size_terms">12sp</dimen>

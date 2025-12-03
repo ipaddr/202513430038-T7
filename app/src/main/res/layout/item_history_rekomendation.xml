@@ -1,26 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
     android:background="@android:color/white"
     android:padding="@dimen/spacing_medium"
     android:layout_marginBottom="@dimen/spacing_small">
 
-    <TextView
-        android:id="@+id/tvRecName"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/sample_rec_name"
-        android:textColor="@color/textColorPrimary"
-        android:textSize="@dimen/text_size_normal" />
+        android:layout_toStartOf="@id/btnSetNotification"
+        android:layout_alignParentStart="true"
+        android:layout_marginEnd="@dimen/spacing_small"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tvRecDosis"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/sample_rec_dosis"
-        android:textColor="@color/muted_gray_6B"
-        android:layout_marginTop="@dimen/spacing_xsmall" />
+        <TextView
+            android:id="@+id/tvRecName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/sample_rec_name"
+            android:textColor="@color/textColorPrimary"
+            android:textSize="@dimen/text_size_normal" />
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/tvRecDosis"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/sample_rec_dosis"
+            android:textColor="@color/muted_gray_6B"
+            android:layout_marginTop="@dimen/spacing_xsmall" />
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/btnSetNotification"
+        android:layout_width="@dimen/icon_40"
+        android:layout_height="@dimen/icon_40"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:background="@drawable/circle_bg"
+        android:src="@drawable/ic_disable_notification"
+        android:padding="@dimen/padding_10"
+        android:contentDescription="@string/set_notification_reminder"
+        android:clickable="true"
+        android:focusable="true"
+        android:scaleType="centerInside" />
+
+</RelativeLayout>

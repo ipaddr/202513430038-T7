@@ -52,7 +52,7 @@
             android:src="@drawable/ic_profil_v2"
             android:contentDescription="@string/app_logo_description"
             android:scaleType="centerCrop"
-            android:background="@drawable/circle_bg"
+            android:background="@drawable/profile_icon_bg"
             app:layout_constraintTop_toTopOf="@id/konsultasi_title"
             app:layout_constraintBottom_toBottomOf="@id/konsultasi_subtitle"
             app:layout_constraintEnd_toEndOf="parent" />

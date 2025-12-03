@@ -7,6 +7,11 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <!-- Needed on Android 12+ (API 31+) for exact alarms to work reliably -->
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+    <uses-permission android:name="android.permission.USE_EXACT_ALARM" />
 
     <application
         android:name=".MyApplication"
@@ -34,6 +39,9 @@
         <activity android:name=".activities.AccountSettingsActivity" />
         <activity android:name=".activities.ForgotPasswordActivity" />
         <activity android:name=".activities.HelpSupportActivity" />
+        <activity android:name=".activities.NotificationSettingsActivity"
+            android:exported="false"
+            android:label="@string/notification_settings_title" />
 
         <!-- FileProvider for temporary file sharing with Firebase upload -->
         <provider
@@ -45,6 +53,17 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
+
+        <!-- Reminder receiver for scheduled alarms -->
+        <receiver android:name=".reminder.ReminderReceiver" android:exported="false" />
+
+        <!-- Boot receiver to reschedule reminders after reboot or app update -->
+        <receiver android:name=".reminder.BootReceiver" android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+            </intent-filter>
+        </receiver>
 
     </application>
 </manifest>

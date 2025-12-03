@@ -20,6 +20,7 @@ import com.bumptech.glide.Glide;
 import com.example.medzone.R;
 import com.example.medzone.activities.AccountSettingsActivity;
 import com.example.medzone.activities.LoginActivity;
+import com.example.medzone.activities.NotificationSettingsActivity;
 import com.example.medzone.viewmodel.HistoryViewModel;
 import com.example.medzone.utils.UserPreferences;
 import com.google.firebase.auth.FirebaseAuth;
@@ -396,7 +397,6 @@ public class ProfileFragment extends Fragment {
         android.graphics.Rect dstRect = new android.graphics.Rect(0, 0, size, size);
 
         canvas.drawBitmap(bitmap, srcRect, dstRect, paint);
-
         return output;
     }
 
@@ -456,9 +456,11 @@ public class ProfileFragment extends Fragment {
             TextView title = menuNotifications.findViewById(R.id.menuTitle);
             if (icon != null) icon.setImageResource(R.drawable.ic_notification);
             if (title != null) title.setText(R.string.settings_notifications);
-            menuNotifications.setOnClickListener(v ->
-                    Toast.makeText(requireContext(), "Notifikasi - Coming Soon", Toast.LENGTH_SHORT).show()
-            );
+            menuNotifications.setOnClickListener(v -> {
+                // Open NotificationSettingsActivity
+                Intent intent = new Intent(requireContext(), NotificationSettingsActivity.class);
+                startActivity(intent);
+            });
         }
 
         // Configure Help menu

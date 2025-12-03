@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/dialog_background"
+    android:padding="@dimen/spacing_large">
+
+    <!-- Close Button -->
+    <ImageView
+        android:id="@+id/btnClose"
+        android:layout_width="@dimen/icon_medium"
+        android:layout_height="@dimen/icon_medium"
+        android:src="@drawable/ic_close"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="@string/close"
+        app:tint="@color/textColorSecondary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Header Icon + Title -->
+    <LinearLayout
+        android:id="@+id/headerContainer"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btnClose"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="@dimen/icon_medium"
+            android:layout_height="@dimen/icon_medium"
+            android:src="@drawable/ic_notification"
+            android:background="@drawable/circle_bg"
+            android:backgroundTint="@color/primary_blue"
+            android:padding="@dimen/spacing_xsmall"
+            app:tint="@color/white" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_small"
+            android:text="@string/set_medicine_reminder"
+            android:textColor="@color/textColorPrimary"
+            android:textSize="@dimen/text_size_h3"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <!-- Medicine Info Card -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/medicineInfoCard"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_16"
+        app:cardCornerRadius="@dimen/corner_radius_12"
+        app:cardElevation="0dp"
+        app:cardBackgroundColor="@color/chip_bg_light"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/headerContainer">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="@dimen/spacing_medium"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="@dimen/icon_medium"
+                android:layout_height="@dimen/icon_medium"
+                android:src="@drawable/ic_obat"
+                app:tint="@color/primary_blue" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="@dimen/spacing_small"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvMedicineName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="OBH Combi Batuk Berdahak Sirup"
+                    android:textColor="@color/textColorPrimary"
+                    android:textSize="@dimen/text_size_normal"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvMedicineDose"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="15 ml 3× sehari"
+                    android:textColor="@color/textColorSecondary"
+                    android:textSize="@dimen/text_size_small"
+                    android:layout_marginTop="@dimen/spacing_xxxsmall" />
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Frequency Section -->
+    <LinearLayout
+        android:id="@+id/frequencySection"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/spacing_16"
+        android:gravity="center_vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/medicineInfoCard">
+
+        <ImageView
+            android:layout_width="@dimen/icon_small"
+            android:layout_height="@dimen/icon_small"
+            android:src="@drawable/ic_notification"
+            app:tint="@color/primary_blue" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_xsmall"
+            android:text="@string/frequency_per_day"
+            android:textColor="@color/textColorPrimary"
+            android:textSize="@dimen/text_size_normal" />
+    </LinearLayout>
+
+    <!-- Frequency Chips -->
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/chipGroupFrequency"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_small"
+        app:singleSelection="true"
+        app:chipSpacingHorizontal="@dimen/spacing_small"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/frequencySection">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip1x"
+            style="@style/CustomChipChoice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1×" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip2x"
+            style="@style/CustomChipChoice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2×" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip3x"
+            style="@style/CustomChipChoice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="3×"
+            android:checked="true" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip4x"
+            style="@style/CustomChipChoice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="4×" />
+    </com.google.android.material.chip.ChipGroup>
+
+    <!-- Time Schedule Section -->
+    <LinearLayout
+        android:id="@+id/scheduleSection"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/spacing_16"
+        android:gravity="center_vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/chipGroupFrequency">
+
+        <ImageView
+            android:layout_width="@dimen/icon_small"
+            android:layout_height="@dimen/icon_small"
+            android:src="@drawable/ic_riwayat"
+            app:tint="@color/primary_blue" />
+
+        <TextView
+            android:id="@+id/tvScheduleLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_xsmall"
+            android:text="@string/schedule_label"
+            android:textColor="@color/textColorPrimary"
+            android:textSize="@dimen/text_size_normal" />
+    </LinearLayout>
+
+    <!-- Time Slots Container -->
+    <LinearLayout
+        android:id="@+id/timeSlotsContainer"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="@dimen/spacing_small"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/scheduleSection" />
+
+    <!-- Duration Section -->
+    <LinearLayout
+        android:id="@+id/durationSection"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/spacing_16"
+        android:gravity="center_vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/timeSlotsContainer">
+
+        <ImageView
+            android:layout_width="@dimen/icon_small"
+            android:layout_height="@dimen/icon_small"
+            android:src="@drawable/ic_kalender"
+            app:tint="@color/primary_blue" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_xsmall"
+            android:text="@string/treatment_duration"
+            android:textColor="@color/textColorPrimary"
+            android:textSize="@dimen/text_size_normal" />
+    </LinearLayout>
+
+    <!-- Duration Chips -->
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/chipGroupDuration"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_small"
+        app:singleSelection="true"
+        app:chipSpacingHorizontal="@dimen/spacing_small"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/durationSection">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip1day"
+            style="@style/CustomChipChoice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/duration_1_day" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip3days"
+            style="@style/CustomChipChoice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/duration_3_days" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip7days"
+            style="@style/CustomChipChoice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/duration_7_days"
+            android:checked="true" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip14days"
+            style="@style/CustomChipChoice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/duration_14_days" />
+    </com.google.android.material.chip.ChipGroup>
+
+    <!-- Action Buttons -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/spacing_large"
+        android:gravity="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/chipGroupDuration">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnCancel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/cancel"
+            android:textColor="@color/textColorSecondary"
+            android:background="@drawable/button_rounded_outline"
+            android:textSize="@dimen/text_size_button"
+            android:layout_marginEnd="@dimen/spacing_small" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnSave"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/btn_save"
+            android:textColor="@color/white"
+            android:background="@drawable/button_rounded"
+            android:textSize="@dimen/text_size_button"
+            android:textStyle="bold"
+            android:layout_marginStart="@dimen/spacing_small" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

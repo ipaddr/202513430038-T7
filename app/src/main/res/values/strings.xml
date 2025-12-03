@@ -129,11 +129,11 @@
     <string name="faq_title">Pertanyaan Umum (FAQ)</string>
 
     <!-- Contact Information -->
-    <string name="whatsapp_number">0812-3456-7890</string>
-    <string name="whatsapp_number_clean">6281234567890</string>
-    <string name="support_email">support@medzone.com</string>
-    <string name="phone_number">0812-3456-7890</string>
-    <string name="phone_number_clean">081234567890</string>
+    <string name="whatsapp_number">0812-6665-4510</string>
+    <string name="whatsapp_number_clean">6281266654510</string>
+    <string name="support_email">rafidhilmi0504@gmail.com</string>
+    <string name="phone_number">0812-6665-4510</string>
+    <string name="phone_number_clean">081266654510</string>
 
     <!-- Panduan Penggunaan -->
     <string name="cara_konsultasi">Cara konsultasi</string>
@@ -174,4 +174,48 @@
     <string name="contact_email">Email</string>
     <string name="contact_phone">Telepon</string>
     <string name="account_settings_subtitle">Kelola informasi pribadi Anda</string>
+
+    <!-- Notification Settings -->
+    <string name="notification_settings_title">Pengaturan Notifikasi</string>
+    <string name="notification_settings_subtitle">Atur pengingat penggunaan obat Anda</string>
+    <string name="allow_notifications_title">Izinkan Notifikasi</string>
+    <string name="allow_notifications_desc">Aktifkan untuk menerima pengingat penggunaan obat</string>
+    <string name="vibration_title">Getaran</string>
+    <string name="vibration_desc">Aktifkan getaran saat notifikasi muncul</string>
+    <string name="ringtone_title">Nada Dering</string>
+    <string name="ringtone_default">Default</string>
+    <string name="preview_ringtone">Putar contoh</string>
+    <string name="save_settings">Simpan Pengaturan</string>
+    <string name="notification_settings_saved">Pengaturan notifikasi disimpan</string>
+    <string name="ringtone_picker_title">Pilih nada dering</string>
+    <string name="set_notification_reminder">Atur pengingat notifikasi</string>
+    <string name="set_medicine_reminder">Atur Pengingat Obat</string>
+    <string name="frequency_per_day">Frekuensi Penggunaan per Hari:</string>
+    <string name="schedule_label">Jadwal Penggunaan (3× sehari):</string>
+    <string name="treatment_duration">Durasi Pengobatan:</string>
+    <string name="duration_1_day">1 hari</string>
+    <string name="duration_3_days">3 hari</string>
+    <string name="duration_7_days">7 hari</string>
+    <string name="duration_14_days">14 hari</string>
+    <string name="cancel">Batal</string>
+    <string name="save_schedule">Simpan Jadwal</string>
+    <string name="close">Tutup</string>
+    <string name="dose_label">Dosis %1$d</string>
+    <string name="notification_permission_required">Izinkan notifikasi terlebih dahulu di Pengaturan</string>
+    <string name="notification_enabled_prompt">Notifikasi aplikasi telah diaktifkan; mohon izinkan notifikasi sistem jika diminta.</string>
+    <string name="notification_must_be_enabled">Aktifkan notifikasi terlebih dahulu untuk menggunakan fitur pengingat</string>
+    <string name="notification_disabled">Notifikasi dinonaktifkan</string>
+    <string name="vibration_enabled">Getaran diaktifkan</string>
+    <string name="vibration_disabled">Getaran dinonaktifkan</string>
+    <string name="reminder_saved">Pengingat berhasil disimpan</string>
+    <string name="delete">Hapus</string>
+
+    <!-- Medicine Reminder Notification Messages -->
+    <string name="reminder_notification_title">🔔 Waktunya Menggunakan Obat!</string>
+    <string name="reminder_notification_message">Saatnya menggunakan %1$s (%2$s) untuk %3$s. Semoga cepat sembuh! 💊</string>
+    <string name="reminder_health_default">kesehatan Anda</string>
+    <string name="vibration_settings_title">Aktifkan Getaran di Pengaturan Sistem</string>
+    <string name="vibration_settings_message">Pengaturan channel notifikasi sistem memblokir getaran. Ketuk untuk membuka pengaturan dan aktifkan getaran.</string>
+    <string name="open_settings">Buka Pengaturan</string>
+    <string name="ringtone_info">Menggunakan nada dering default sistem. Tidak dapat diubah untuk konsistensi notifikasi.</string>
 </resources>

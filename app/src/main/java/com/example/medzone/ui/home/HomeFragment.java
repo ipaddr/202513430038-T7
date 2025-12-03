@@ -327,6 +327,7 @@ public class HomeFragment extends Fragment {
         if (photoUrl != null && !photoUrl.isEmpty()) {
             loadPhotoUrl(photoUrl, profileIcon);
         } else {
+            // Show default icon with white tint (background already set in XML)
             profileIcon.setImageResource(R.drawable.ic_profil);
             androidx.core.widget.ImageViewCompat.setImageTintList(profileIcon,
                 android.content.res.ColorStateList.valueOf(androidx.core.content.ContextCompat.getColor(requireContext(), R.color.white)));
@@ -385,6 +386,7 @@ public class HomeFragment extends Fragment {
             if (photoUrl != null && !photoUrl.isEmpty()) {
                 loadPhotoUrl(photoUrl, profileIcon);
             } else {
+                // Show default icon with white tint (background already set in XML)
                 profileIcon.setImageResource(R.drawable.ic_profil);
                 androidx.core.widget.ImageViewCompat.setImageTintList(profileIcon,
                     android.content.res.ColorStateList.valueOf(androidx.core.content.ContextCompat.getColor(requireContext(), R.color.white)));
@@ -397,9 +399,11 @@ public class HomeFragment extends Fragment {
 
     /**
      * Load photo from URL or Base64 data URI
+     * Note: Background is set in XML (profile_icon_bg) and should remain for both default icon and profile photo
      */
     private void loadPhotoUrl(String photoUrl, ImageView imageView) {
         if (photoUrl == null || photoUrl.isEmpty()) {
+            // Show default icon with white tint (background already set in XML)
             imageView.setImageResource(R.drawable.ic_profil);
             // Set tint putih untuk icon default
             androidx.core.widget.ImageViewCompat.setImageTintList(imageView,
@@ -419,11 +423,12 @@ public class HomeFragment extends Fragment {
                     // Apply circular crop to bitmap
                     android.graphics.Bitmap circularBitmap = getCircularBitmap(bitmap);
 
-                    // PENTING: Hapus tint sebelum set foto profil asli
+                    // PENTING: Hapus tint untuk foto profil asli (background tetap dari XML)
                     androidx.core.widget.ImageViewCompat.setImageTintList(imageView, null);
 
                     imageView.setImageBitmap(circularBitmap);
                 } else {
+                    // Show default icon with white tint (background already set in XML)
                     imageView.setImageResource(R.drawable.ic_profil);
                     // Set tint putih untuk icon default
                     androidx.core.widget.ImageViewCompat.setImageTintList(imageView,
@@ -431,6 +436,7 @@ public class HomeFragment extends Fragment {
                 }
             } catch (Exception e) {
                 android.util.Log.e("HomeFragment", "Failed to decode Base64 image: " + e.getMessage());
+                // Show default icon with white tint (background already set in XML)
                 imageView.setImageResource(R.drawable.ic_profil);
                 // Set tint putih untuk icon default
                 androidx.core.widget.ImageViewCompat.setImageTintList(imageView,
@@ -439,7 +445,7 @@ public class HomeFragment extends Fragment {
         } else {
             // Regular URL, use Glide
             try {
-                // Hapus tint sebelum load dengan Glide
+                // Hapus tint untuk foto profil asli (background tetap dari XML)
                 androidx.core.widget.ImageViewCompat.setImageTintList(imageView, null);
 
                 Glide.with(requireContext())
@@ -449,6 +455,7 @@ public class HomeFragment extends Fragment {
                     .into(imageView);
             } catch (Exception e) {
                 android.util.Log.e("HomeFragment", "Failed to load image with Glide: " + e.getMessage());
+                // Show default icon with white tint (background already set in XML)
                 imageView.setImageResource(R.drawable.ic_profil);
                 // Set tint putih untuk icon default
                 androidx.core.widget.ImageViewCompat.setImageTintList(imageView,

@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -17,6 +18,7 @@ import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.medzone.R;
+import com.example.medzone.utils.NotificationPreferences;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 
@@ -29,10 +31,19 @@ public class HistoryAdapter extends ListAdapter<com.example.medzone.model.Histor
     private final Context context;
     private final SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
     private final SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm", Locale.getDefault());
+    private OnNotificationClickListener notificationClickListener;
+
+    public interface OnNotificationClickListener {
+        void onNotificationClick(com.example.medzone.model.Recommendation recommendation, int historyItemPosition, String reminderKey, boolean isExisting);
+    }
 
     public HistoryAdapter(Context context) {
         super(DIFF_CALLBACK);
         this.context = context;
+    }
+
+    public void setOnNotificationClickListener(OnNotificationClickListener listener) {
+        this.notificationClickListener = listener;
     }
 
     @NonNull
@@ -92,6 +103,7 @@ public class HistoryAdapter extends ListAdapter<com.example.medzone.model.Histor
                 View card = LayoutInflater.from(context).inflate(R.layout.item_history_rekomendation, holder.recommendationList, false);
                 TextView name = card.findViewById(R.id.tvRecName);
                 TextView dosis = card.findViewById(R.id.tvRecDosis);
+                ImageButton btnNotification = card.findViewById(R.id.btnSetNotification);
 
                 String nameText = r.name != null ? r.name : "-";
                 String dosisText = r.dosis != null ? r.dosis : "-";
@@ -99,6 +111,26 @@ public class HistoryAdapter extends ListAdapter<com.example.medzone.model.Histor
                 Log.d(TAG, "  Setting name='" + nameText + "' dosis='" + dosisText + "'");
                 name.setText(nameText);
                 dosis.setText(dosisText);
+
+                // determine a stable key for this recommendation (use name + dosis as simple key)
+                String reminderKey = "reminder_" + (r.name != null ? r.name.hashCode() : Integer.valueOf(i).hashCode()) + "_" + (r.dosis != null ? r.dosis.hashCode() : 0);
+
+                NotificationPreferences prefs = new NotificationPreferences(context);
+                boolean isSet = prefs.isReminderSet(reminderKey);
+
+                // apply visual state based on isSet
+                applyNotificationButtonState(btnNotification, isSet);
+
+                // Set click listener for notification button
+                final int currentPosition = position;
+                final com.example.medzone.model.Recommendation currentRec = r;
+                btnNotification.setOnClickListener(v -> {
+                    // Open dialog (dialog will handle save/delete). Pass current reminder state and key.
+                    if (notificationClickListener != null) {
+                        notificationClickListener.onNotificationClick(currentRec, currentPosition, reminderKey, isSet);
+                    }
+                });
+
                 holder.recommendationList.addView(card);
             }
         } else {
@@ -128,6 +160,26 @@ public class HistoryAdapter extends ListAdapter<com.example.medzone.model.Histor
         chip.setChipStrokeWidth(strokeWidth);
     }
 
+    private void applyNotificationButtonState(ImageButton btn, boolean enabled) {
+        if (btn == null) return;
+        if (enabled) {
+            // active: ic_notification white, background primary_blue
+            btn.setImageResource(R.drawable.ic_notification);
+            btn.setColorFilter(ContextCompat.getColor(context, R.color.white));
+            btn.setBackground(ContextCompat.getDrawable(context, R.drawable.circle_bg));
+            btn.getBackground().setTint(ContextCompat.getColor(context, R.color.primary_blue));
+        } else {
+            // inactive: ic_disable_notification (outline), background light gray
+            int drawableId = context.getResources().getIdentifier("ic_disable_notification", "drawable", context.getPackageName());
+            if (drawableId == 0) drawableId = context.getResources().getIdentifier("ic_notification_outline", "drawable", context.getPackageName());
+            if (drawableId == 0) drawableId = R.drawable.ic_notification;
+            btn.setImageResource(drawableId);
+            btn.setColorFilter(ContextCompat.getColor(context, R.color.muted_gray_6B));
+            btn.setBackground(ContextCompat.getDrawable(context, R.drawable.circle_bg));
+            btn.getBackground().setTint(ContextCompat.getColor(context, R.color.blue_light));
+        }
+    }
+
     static class HistoryViewHolder extends RecyclerView.ViewHolder {
         TextView tvDate, tvTime, tvKeluhanLabel;
         ChipGroup chipGroupKeluhanItem;
@@ -155,4 +207,9 @@ public class HistoryAdapter extends ListAdapter<com.example.medzone.model.Histor
             return oldItem == newItem || (oldItem.timestamp == newItem.timestamp && (oldItem.keluhan == null ? newItem.keluhan == null : oldItem.keluhan.equals(newItem.keluhan)));
         }
     };
+
+    // Helper to generate reminder key for a recommendation (same logic used in onBind)
+    public static String computeReminderKey(com.example.medzone.model.Recommendation r, int index) {
+        return "reminder_" + (r.name != null ? r.name.hashCode() : Integer.valueOf(index).hashCode()) + "_" + (r.dosis != null ? r.dosis.hashCode() : 0);
+    }
 }

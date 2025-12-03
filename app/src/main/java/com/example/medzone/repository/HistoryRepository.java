@@ -259,4 +259,97 @@ public class HistoryRepository {
                     if (onComplete != null) mainHandler.post(onComplete);
                 });
     }
+
+    // Save reminder flag for a specific recommendation in a user's history document on Firestore
+    public void saveReminderToCloud(String userId, String historyDocumentId, String reminderKey, Map<String, Object> reminderData, Runnable onComplete) {
+        if (userId == null || historyDocumentId == null) {
+            if (onComplete != null) onComplete.run();
+            return;
+        }
+        db.collection("users").document(userId)
+                .collection("histories")
+                .document(historyDocumentId)
+                .collection("reminders")
+                .document(reminderKey)
+                .set(reminderData)
+                .addOnSuccessListener(aVoid -> {
+                    Log.d(TAG, "Reminder saved to cloud for history " + historyDocumentId + ", key=" + reminderKey);
+                    if (onComplete != null) mainHandler.post(onComplete);
+                })
+                .addOnFailureListener(e -> {
+                    Log.e(TAG, "Failed to save reminder to cloud: " + e.getMessage());
+                    if (onComplete != null) mainHandler.post(onComplete);
+                });
+    }
+
+    public void deleteReminderFromCloud(String userId, String historyDocumentId, String reminderKey, Runnable onComplete) {
+        if (userId == null || historyDocumentId == null) {
+            if (onComplete != null) onComplete.run();
+            return;
+        }
+        db.collection("users").document(userId)
+                .collection("histories")
+                .document(historyDocumentId)
+                .collection("reminders")
+                .document(reminderKey)
+                .delete()
+                .addOnSuccessListener(aVoid -> {
+                    Log.d(TAG, "Reminder deleted from cloud for history " + historyDocumentId + ", key=" + reminderKey);
+                    if (onComplete != null) mainHandler.post(onComplete);
+                })
+                .addOnFailureListener(e -> {
+                    Log.e(TAG, "Failed to delete reminder from cloud: " + e.getMessage());
+                    if (onComplete != null) mainHandler.post(onComplete);
+                });
+    }
+
+    // Fetch reminders for a history document and merge into Recommendation objects based on reminderKey matching
+    public void fetchRemindersForHistory(String userId, String historyDocumentId, java.util.function.BiConsumer<String, Boolean> callback) {
+        if (userId == null || historyDocumentId == null) {
+            // nothing to do
+            return;
+        }
+        db.collection("users").document(userId)
+                .collection("histories")
+                .document(historyDocumentId)
+                .collection("reminders")
+                .get()
+                .addOnSuccessListener(query -> {
+                    for (var doc : query.getDocuments()) {
+                        String key = doc.getId();
+                        boolean set = doc.exists();
+                        // callback in main thread
+                        mainHandler.post(() -> callback.accept(key, set));
+                    }
+                })
+                .addOnFailureListener(e -> {
+                    Log.e(TAG, "Failed to fetch reminders for history: " + e.getMessage());
+                });
+    }
+
+    // Fetch a reminder document's metadata for a specific history document
+    public void fetchReminderMeta(String userId, String historyDocumentId, String reminderKey, java.util.function.Consumer<java.util.Map<String, Object>> callback) {
+        if (userId == null || historyDocumentId == null || reminderKey == null) {
+            if (callback != null) callback.accept(null);
+            return;
+        }
+        db.collection("users").document(userId)
+                .collection("histories")
+                .document(historyDocumentId)
+                .collection("reminders")
+                .document(reminderKey)
+                .get()
+                .addOnSuccessListener(doc -> {
+                    if (doc != null && doc.exists()) {
+                        java.util.Map<String, Object> data = doc.getData();
+                        mainHandler.post(() -> callback.accept(data));
+                    } else {
+                        mainHandler.post(() -> callback.accept(null));
+                    }
+                })
+                .addOnFailureListener(e -> {
+                    Log.e(TAG, "Failed to fetch reminder meta: " + e.getMessage());
+                    mainHandler.post(() -> callback.accept(null));
+                });
+    }
 }

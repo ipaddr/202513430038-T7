@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:layout_marginBottom="@dimen/spacing_small">
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnDoseLabel"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        tools:text="Dosis 1"
+        android:textColor="@color/white"
+        android:background="@drawable/button_rounded"
+        android:textSize="@dimen/text_size_small"
+        android:paddingTop="@dimen/spacing_xsmall"
+        android:paddingBottom="@dimen/spacing_xsmall" />
+
+    <EditText
+        android:id="@+id/etTime"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginStart="@dimen/spacing_small"
+        android:hint="08:00 AM"
+        android:inputType="none"
+        android:focusable="false"
+        android:clickable="true"
+        android:textSize="@dimen/text_size_normal"
+        android:padding="@dimen/spacing_medium"
+        android:background="@drawable/edit_text_background"
+        android:drawableEnd="@drawable/ic_riwayat"
+        android:drawablePadding="@dimen/spacing_small" />
+
+</LinearLayout>

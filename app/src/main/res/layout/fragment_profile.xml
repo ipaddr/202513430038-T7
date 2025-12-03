@@ -102,7 +102,7 @@
                                 android:id="@+id/tvName"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Rafid Hilmi"
+                                tools:text="@string/default_user"
                                 android:textColor="@color/text_dark"
                                 android:textSize="@dimen/text_size_normal"
                                 android:textStyle="bold" />
@@ -112,7 +112,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/spacing_xsmall"
-                                android:text="Bergabung sejak\nJanuari 2025"
+                                tools:text="Bergabung sejak\nJanuari 2025"
                                 android:textColor="@color/muted_gray_6B" />
 
                         </LinearLayout>
@@ -145,7 +145,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="@dimen/spacing_small"
-                                android:text="rafidhilmi0504@email.com"
+                                tools:text="user@example.com"
                                 android:textColor="@color/muted_gray_6B" />
                         </LinearLayout>
 
@@ -169,7 +169,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="@dimen/spacing_small"
-                                android:text="+62 812 3456 7890"
+                                tools:text="@string/phone_not_available"
                                 android:textColor="@color/muted_gray_6B" />
                         </LinearLayout>
 

@@ -2,6 +2,7 @@ package com.example.medzone.activities;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,13 +11,12 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.medzone.R;
-import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class ForgotPasswordActivity extends AppCompatActivity {
 
     private EditText inputEmailStep1;
-    private MaterialButton btnSendCode;
+    private AppCompatButton btnSendCode;
     private FirebaseAuth auth;
 
     @Override

@@ -68,4 +68,25 @@ public class HistoryViewModel extends AndroidViewModel {
             repository.refreshFromCloudIfChanged(uid, null);
         }
     }
+
+    // New: fetch reminder flags for a given history and forward to callback
+    public void fetchRemindersForHistory(String historyId, java.util.function.BiConsumer<String, Boolean> callback) {
+        String uid = FirebaseAuth.getInstance().getCurrentUser() == null ? null : FirebaseAuth.getInstance().getCurrentUser().getUid();
+        repository.fetchRemindersForHistory(uid, historyId, callback);
+    }
+
+    public void saveReminderToCloud(String historyDocumentId, String reminderKey, java.util.Map<String, Object> reminderData, Runnable onComplete) {
+        String uid = FirebaseAuth.getInstance().getCurrentUser() == null ? null : FirebaseAuth.getInstance().getCurrentUser().getUid();
+        repository.saveReminderToCloud(uid, historyDocumentId, reminderKey, reminderData, onComplete);
+    }
+
+    public void deleteReminderFromCloud(String historyDocumentId, String reminderKey, Runnable onComplete) {
+        String uid = FirebaseAuth.getInstance().getCurrentUser() == null ? null : FirebaseAuth.getInstance().getCurrentUser().getUid();
+        repository.deleteReminderFromCloud(uid, historyDocumentId, reminderKey, onComplete);
+    }
+
+    public void fetchReminderMeta(String historyDocumentId, String reminderKey, java.util.function.Consumer<java.util.Map<String, Object>> callback) {
+        String uid = FirebaseAuth.getInstance().getCurrentUser() == null ? null : FirebaseAuth.getInstance().getCurrentUser().getUid();
+        repository.fetchReminderMeta(uid, historyDocumentId, reminderKey, callback);
+    }
 }
